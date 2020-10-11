@@ -1,0 +1,41 @@
+<code>
+&lt;html&gt;<br>
+&lt;head&gt;<br>
+&lt;meta charset="utf-8"&gt;<br>
+&lt;link rel="stylesheet" href="styles.css"&gt;<br>
+&lt;title&gt;CSP10&lt;/title&gt;<br>
+&lt;!--Everything in the head tags is not part of the challange and can be ignored--&gt;<br>
+&lt;/head&gt;<br>
+<br>
+&lt;body class="container content"&gt;<br>
+<br>
+&lt;h1&gt;Encoded&lt;/h1&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;form method="post"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;label&gt;Input Secret&lt;/label&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;input placeholder="Secret" name="Secret" type="text" /&gt;&lt;br&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;input name="submit" type="submit" /&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/form&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;?php<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$encodedSecret = "3d3d674d6b6c7a6475523262796f474d";<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function encodeSecret($secret) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return bin2hex(strrev(base64_encode($secret)));<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if(array_key_exists("submit", $_POST)) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(encodeSecret($_POST['Secret']) == $encodedSecret){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo "Secret Correct";<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo "&lt;br&gt;";<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo "REDACTED";<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo "Wrong Secret";<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;a href="index-source.html"&gt;View Source&lt;/a&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+&lt;/body&gt;<br>
+&lt;/html&gt;<br>
+</code>
