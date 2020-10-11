@@ -1,0 +1,67 @@
+---
+layout: default
+title: Home
+---
+<h1>Welcome to the Computer Science Puzzle</h1>
+<p>
+Computer Science Puzzle is a puzzle based website where you the player must find the password to the next page. Each page contains it's own puzzle which becomes harder as you continue.
+</p>
+<h3>How do you gain access to the puzzles</h3>
+<p>
+Each level can be access by adding <b>/cspX</b> to the end of the site url where <b>X</b> is the level number. For example level 1 is 10.8.26.135/csp1. <br>
+Each level has the password to the next level hidden within it, whether as plain text or in some other style.
+</p>
+<p>
+The Username for each level is the level name.<br>
+Each password will always look like this when found. <code class="highlighter-rouge">flag:1234567890</code>(<i>The password for the site is the part after <code class="highlighter-rouge">flag:</code></i>)
+</p>
+<br>
+<p>
+Now to begin here is the first level.<br>
+<b>User: cps1<br>
+Password: csp1<br>
+URL: <a href="csp1/">http://10.8.26.135/csp1</a></b>
+</p>
+
+<h1>News Feed</h1>
+<div class="posts">
+  {% for post in paginator.posts %}
+<article class="post">
+<h3 class="post-title">
+<a href="{% if post.link %}{{ post.link }}{% else %}{{ post.url }}{% endif %}">{{ post.title | smartify }}</a>{% if post.link %}<span class="link-arrow"> &rarr;</span>{% endif %}
+</h3>
+    <time datetime="{{ post.date | date_to_xmlschema }}" class="post-date">{{ post.date | date_to_long_string: "ordinal", "US" }}
+    {% if post %}
+    {% assign categories = post.categories %}
+    {% else %}
+    {% assign categories = page.categories %}
+    {% endif %}
+    {% for category in categories %}
+    in <a href="{{site.baseurl}}/categories/#{{category|slugize}}">{{category}}</a>
+    {% unless forloop.last %}&nbsp;{% endunless %}
+    {% endfor %}
+    </time>
+
+<span class="permalink">
+{% if post.link %}
+<a href="{{ post.url }}">Permalink</a>
+{% endif %}
+</span>
+
+    {{ post.excerpt | smartify }}
+
+<a href="{{ post.url }}">Continue reading ...</a>
+
+  </article>
+  {% endfor %}
+</div>
+
+<div class="PageNavigation">
+  {% if paginator.next_page %}
+    <a class="prev" href="{{ paginator.next_page_path | prepend: site.baseurl }}">← Older</a>
+  {% endif %}
+  {% if paginator.previous_page %}
+    <a class="next" href="{{ paginator.previous_page_path | prepend: site.baseurl }}">Newer →</a>
+  {% endif %}
+</div>
+
